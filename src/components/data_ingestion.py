@@ -10,19 +10,25 @@ from dataclasses import dataclass
 # Easy to define just the variables within a class with the dataclass decorator
 @dataclass
 class DataIngestionConfig:
-    train_data_path: str = os.path.join('atrifacts', "train.csv")
-    test_data_path: str = os.path.join('atrifacts', "test.csv")
-    raw_data_path: str = os.path.join('atrifacts', "data.csv")
+    '''defining the paths for data storage'''
+    train_data_path: str = os.path.join('artifacts', "train.csv")
+    test_data_path: str = os.path.join('artifacts', "test.csv")
+    raw_data_path: str = os.path.join('artifacts', "data.csv")
 
 # if you are defining other functions in a class, then it is better to use the init function
 class DataIngestion:
+    '''Main data ingestion function'''
     def __init__(self):
+        '''Initializing the function with the 3 data paths in the ingestion_config object'''
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
+        '''If your data is stored in some database, this function will read the data from the source and split it into train and test sets'''
         logging.info("Entered the data ingestion method or component")
         try:
-            df = pd.read_csv('notebook/data/stud.csv') # data can be read from any source (SQL, mongoDB, etc)
+            # data can be read from any source (SQL, mongoDB, etc)
+            # Here I am reading it from a csv in my data folder
+            df = pd.read_csv('notebook/data/stud.csv') 
             logging.info("Read the data set as a dataframe")
             
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok = True)
@@ -37,7 +43,7 @@ class DataIngestion:
             logging.info("Ingestion of the data is complete")
             
             return (
-                self.ingestion_config.train_data_path, 
+                self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path
             )
         except Exception as e:
