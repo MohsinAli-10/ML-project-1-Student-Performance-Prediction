@@ -20,11 +20,11 @@ from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join('artifacts', "preprocessor.pkl")
+    preprocessor_obj_file_path = os.path.join('artifacts', "preprocessor.pkl") # pickle file path for the preprocessor
 
 class DataTransformation:
     def __init__(self):
-        self.data_transformation_config = DataTransformationConfig()
+        self.data_transformation_config = DataTransformationConfig() # Creating an object that contains the preprocessor path
 
     def get_transformer_obj(self):
         '''This function is responsible for data transformation'''
@@ -66,6 +66,7 @@ class DataTransformation:
         
     def initiate_data_transformation(self, train_path, test_path):
         try:
+            # write code to check for existing obj before creating new preprocessor each time
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
 
@@ -87,7 +88,7 @@ class DataTransformation:
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe.")
 
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
-            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df) # confusion
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
             train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
@@ -104,5 +105,6 @@ class DataTransformation:
                 test_arr,
                 self.data_transformation_config.preprocessor_obj_file_path
             )
+        
         except Exception as e:
             raise CustomException(e, sys) # raises custom exception with the error message e and sys as the system information

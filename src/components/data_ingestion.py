@@ -26,7 +26,8 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
-        '''If your data is stored in some database, this function will read the data from the source and split it into train and test sets'''
+        '''If your data is stored in some database, this function will read the data from the source and split it into train and test
+          sets'''
         logging.info("Entered the data ingestion method or component")
         try:
             # data can be read from any source (SQL, mongoDB, etc)
