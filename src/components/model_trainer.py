@@ -31,10 +31,10 @@ class ModelTrainer:
         try:
             logging.info("splitting training and test input data")
             x_train, y_train, x_test, y_test = (
-                train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1]
+                train_array[:,:-1], # all except the last column
+                train_array[:,-1], # only the last column
+                test_array[:,:-1], # all except the last column
+                test_array[:,-1] # only the last column
             )
         
             models = {
