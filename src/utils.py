@@ -20,6 +20,7 @@ def save_object(file_path, obj):
         raise CustomException(e, sys)
     
 def evaluate_model(x_train, y_train, x_test, y_test, models, params):
+    '''fits the models and returns a report with the r2 scores'''
     try:
         report = {}
 
@@ -43,5 +44,13 @@ def evaluate_model(x_train, y_train, x_test, y_test, models, params):
 
         return report
     
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    '''Load the pickle file from the given file path'''
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys)

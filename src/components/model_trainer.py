@@ -68,12 +68,8 @@ class ModelTrainer:
                     # 'max_features':['auto','sqrt','log2'],
                     'n_estimators': [8,16,32,64,128,256]
                 },
-                "Linear Regression": {
-
-                },
-                "K-Neighbors Regressor": {
-
-                },
+                "Linear Regression": {},
+                "K-Neighbors Regressor": {},
                 "XGB Regressor": {
                     'learning_rate':[.1,.01,.05,.001],
                     'n_estimators': [8,16,32,64,128,256]
@@ -90,7 +86,8 @@ class ModelTrainer:
                 }
             }
             
-            model_report: dict = evaluate_model(x_train=x_train, y_train=y_train, x_test = x_test, y_test = y_test, models=models, params=params)
+            model_report: dict = evaluate_model(x_train=x_train, y_train=y_train, x_test = x_test, y_test = y_test, models=models, 
+                                                params=params)
 
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
