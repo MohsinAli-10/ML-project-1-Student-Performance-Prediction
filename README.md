@@ -1,2 +1,2 @@
 First End to End ML project
-![Alt text](student performance predictor.jpeg)
+![image of application](predictor.jpeg)
